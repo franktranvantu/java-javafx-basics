@@ -1,12 +1,16 @@
 package com.franktran;
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -33,6 +37,7 @@ public class Main extends Application {
 
         Button loginButton = new Button("Log In");
         GridPane.setConstraints(loginButton, 1, 2);
+        GridPane.setHalignment(loginButton, HPos.RIGHT);
 
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
