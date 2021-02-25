@@ -21,7 +21,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Button button = new Button("Click me!");
-        button.setOnAction(actionEvent -> AlertBox.display("Title of Window", "Message of Window"));
+        button.setOnAction(actionEvent -> {
+            boolean answer = ConfirmBox.display("Confirm change", "Are you sure you want to send naked pics?");
+            System.out.println(answer);
+        });
 
         StackPane layout = new StackPane(button);
 

@@ -8,18 +8,28 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AlertBox {
+public class ConfirmBox {
 
-    public static void display(String title, String message) {
+    private static boolean answer;
+
+    public static boolean display(String title, String message) {
         Stage window = new Stage();
 
         Label label = new Label(message);
 
-        Button button = new Button("Close the window");
-        button.setOnAction(actionEvent -> window.close());
+        Button yesButton = new Button("Yes");
+        Button noButton = new Button("No");
+        yesButton.setOnAction(actionEvent -> {
+            answer = true;
+            window.close();
+        });
+        noButton.setOnAction(actionEvent -> {
+            answer = false;
+            window.close();
+        });
 
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(label, button);
+        layout.getChildren().addAll(label, yesButton, noButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);
@@ -29,5 +39,7 @@ public class AlertBox {
         window.setMinWidth(250);
         window.setScene(scene);
         window.showAndWait();
+
+        return answer;
     }
 }
