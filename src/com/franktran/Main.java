@@ -40,9 +40,10 @@ public class Main extends Application {
         GridPane.setHalignment(loginButton, HPos.RIGHT);
 
         GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setVgap(5);
-        grid.setHgap(5);
+        grid.setVgap(8);
+        grid.setHgap(8);
         grid.getChildren().addAll(nameLabel, nameInput, passwordLabel, passwordInput, loginButton);
 
         Scene scene = new Scene(grid, 300, 200);
