@@ -1,12 +1,14 @@
 package com.franktran;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main extends Application implements EventHandler<ActionEvent> {
 
     private Button button;
 
@@ -19,6 +21,7 @@ public class Main extends Application {
         stage.setTitle("This is basic window");
 
         button = new Button("Click me!");
+        button.setOnAction(this);
 
         StackPane layout = new StackPane(button);
 
@@ -26,5 +29,12 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void handle(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == button) {
+            System.out.println("You clicked me");
+        }
     }
 }
