@@ -3,12 +3,12 @@ package com.franktran;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
-    private Stage window;
 
     public static void main(String[] args) {
 	    launch(args);
@@ -16,27 +16,28 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Button button = new Button("Close program");
-        button.setOnAction(actionEvent -> closeProgram());
+        Button fileButton = new Button("File");
+        Button editButton = new Button("Edit");
+        Button viewButton = new Button("View");
 
-        StackPane layout = new StackPane(button);
+        Button studentButton = new Button("Students");
+        Button courseButton = new Button("Courses");
+        Button scheduleButton = new Button("Schedules");
+
+        HBox topMenu = new HBox();
+        topMenu.getChildren().addAll(fileButton, editButton, viewButton);
+
+        VBox leftMenu = new VBox();
+        leftMenu.getChildren().addAll(studentButton, courseButton, scheduleButton);
+
+        BorderPane layout = new BorderPane();
+        layout.setTop(topMenu);
+        layout.setLeft(leftMenu);
 
         Scene scene = new Scene(layout, 300, 250);
 
-        window = stage;
-        window.setOnCloseRequest(actionEvent -> {
-            actionEvent.consume();
-            closeProgram();
-        });
-        window.setTitle("Closing the Program Properly");
-        window.setScene(scene);
-        window.show();
-    }
-
-    private void closeProgram() {
-        boolean answer = ConfirmBox.display("Confirm change", "Sure you want to exit?");
-        if (answer) {
-            window.close();
-        }
+        stage.setScene(scene);
+        stage.setTitle("Embedding layouts");
+        stage.show();
     }
 }
