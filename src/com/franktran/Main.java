@@ -5,12 +5,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private Button button;
+    private Stage window;
+    private Scene scene1, scene2;
 
     public static void main(String[] args) {
 	    launch(args);
@@ -18,22 +21,24 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("This is basic window");
+        window = stage;
 
-        button = new Button("Click me!");
-//        button.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                System.out.println("You clicked me");
-//            }
-//        });
-        button.setOnAction(actionEvent -> System.out.println("You clicked me"));
+        Label label1 = new Label("The first scene");
+        Button button1 = new Button("Go to second scene");
+        button1.setOnAction(actionEvent -> window.setScene(scene2));
 
-        StackPane layout = new StackPane(button);
+        VBox layout1 = new VBox(20);
+        layout1.getChildren().addAll(label1, button1);
+        scene1 = new Scene(layout1, 300, 200);
 
-        Scene scene = new Scene(layout, 300, 250);
+        Button button2 = new Button("Go to first scene");
+        button2.setOnAction(actionEvent -> window.setScene(scene1));
 
-        stage.setScene(scene);
-        stage.show();
+        StackPane layout2 = new StackPane(button2);
+        scene2 = new Scene(layout2, 600, 300);
+
+        window.setTitle("Switching Scenes");
+        window.setScene(scene1);
+        window.show();
     }
 }
