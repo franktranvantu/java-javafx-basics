@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Main extends Application implements EventHandler<ActionEvent> {
+public class Main extends Application {
 
     private Button button;
 
@@ -21,7 +21,13 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         stage.setTitle("This is basic window");
 
         button = new Button("Click me!");
-        button.setOnAction(this);
+//        button.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent actionEvent) {
+//                System.out.println("You clicked me");
+//            }
+//        });
+        button.setOnAction(actionEvent -> System.out.println("You clicked me"));
 
         StackPane layout = new StackPane(button);
 
@@ -29,12 +35,5 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         stage.setScene(scene);
         stage.show();
-    }
-
-    @Override
-    public void handle(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == button) {
-            System.out.println("You clicked me");
-        }
     }
 }
