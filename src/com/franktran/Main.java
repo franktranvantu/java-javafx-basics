@@ -17,33 +17,35 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Label nameLabel = new Label("Username:");
-        GridPane.setConstraints(nameLabel, 0, 0);
+        Label label = new Label("Enter your age:");
+        GridPane.setConstraints(label, 0, 0);
 
-        TextField nameInput = new TextField();
-        nameInput.setPromptText("Username here...");
-        GridPane.setConstraints(nameInput, 1,0);
+        TextField input = new TextField();
+        GridPane.setConstraints(input, 1, 0);
 
-        Label passwordLabel = new Label("Password:");
-        GridPane.setConstraints(passwordLabel, 0, 1);
-
-        TextField passwordInput = new TextField();
-        passwordInput.setPromptText("Password here...");
-        GridPane.setConstraints(passwordInput, 1,1);
-
-        Button loginButton = new Button("Log In");
-        GridPane.setConstraints(loginButton, 1, 2);
+        Button button = new Button("Check Age");
+        GridPane.setConstraints(button, 1, 1);
+        button.setOnAction(actionEvent -> isInteger(input));
 
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setVgap(5);
-        grid.setHgap(5);
-        grid.getChildren().addAll(nameLabel, nameInput, passwordLabel, passwordInput, loginButton);
+        grid.setVgap(10);
+        grid.setHgap(8);
+        grid.getChildren().addAll(label, input, button);
 
         Scene scene = new Scene(grid, 300, 200);
 
         stage.setScene(scene);
-        stage.setTitle("Embedding layouts");
+        stage.setTitle("Validate Input");
         stage.show();
+    }
+
+    private void isInteger(TextField input) {
+        try {
+            int year = Integer.parseInt(input.getText());
+            System.out.println(String.format("You are %d years old", year));
+        } catch (NumberFormatException e) {
+            System.out.println(String.format("Error: %s is not a number", input.getText()));
+        }
     }
 }
