@@ -10,24 +10,21 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private Button button;
-
     public static void main(String[] args) {
 	    launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("This is basic window");
+        stage.setTitle("Properties");
 
-        button = new Button("Click me!");
-//        button.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                System.out.println("You clicked me");
-//            }
-//        });
-        button.setOnAction(actionEvent -> System.out.println("You clicked me"));
+        Person person = new Person();
+        person.firstNameProperty().addListener((value, oldValue, newValue) -> {
+            System.out.println(newValue);
+        });
+
+        Button button = new Button("Click me!");
+        button.setOnAction(actionEvent -> person.setFirstName("Frank"));
 
         StackPane layout = new StackPane(button);
 
