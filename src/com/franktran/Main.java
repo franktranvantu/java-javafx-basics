@@ -3,6 +3,7 @@ package com.franktran;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,6 +29,7 @@ public class Main extends Application {
         button1.setOnAction(actionEvent -> window.setScene(scene2));
 
         VBox layout1 = new VBox(20);
+        layout1.setAlignment(Pos.CENTER);
         layout1.getChildren().addAll(label1, button1);
         scene1 = new Scene(layout1, 300, 200);
 
