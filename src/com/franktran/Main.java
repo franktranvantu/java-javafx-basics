@@ -1,11 +1,16 @@
 package com.franktran;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -21,44 +26,34 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         window = stage;
 
-        TreeItem<String> root = new TreeItem<>();
-        root.setExpanded(true);
+        TableColumn<Product, String> nameColumn = new TableColumn<>("Name");
+        nameColumn.setMinWidth(100);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        TreeItem<String> out = new TreeItem<>("out");
-        out.setExpanded(true);
-        root.getChildren().add(out);
+        TableColumn<Product, String> priceColumn = new TableColumn<>("Price");
+        priceColumn.setMinWidth(100);
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        TreeItem<String> production = new TreeItem<>("production");
-        production.setExpanded(true);
-        out.getChildren().add(production);
+        TableColumn<Product, String> quantityColumn = new TableColumn<>("Quantity");
+        quantityColumn.setMinWidth(100);
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-        TreeItem<String> src = new TreeItem<>("src");
-        src.setExpanded(true);
-        root.getChildren().add(src);
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        products.add(new Product("Laptop", 859.00, 20));
+        products.add(new Product("Toilet", 2.49, 198));
+        products.add(new Product("Corn", 1.49, 12));
 
-        TreeItem<String> pack = new TreeItem<>("com.franktran");
-        pack.setExpanded(true);
-        src.getChildren().add(pack);
-
-        TreeItem<String> main = new TreeItem<>("Main");
-        main.setExpanded(true);
-        pack.getChildren().add(main);
-
-        TreeView<String> treeView = new TreeView<>(root);
-        treeView.setShowRoot(false);
-        treeView.getSelectionModel().selectedItemProperty().addListener((value, oldValue, newValue) -> {
-            if (newValue != null) {
-                System.out.println(newValue.getValue());
-            }
-        });
+        TableView<Product> tableView = new TableView<>();
+        tableView.setItems(products);
+        tableView.getColumns().addAll(nameColumn, priceColumn, quantityColumn);
 
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(treeView);
+        layout.getChildren().addAll(tableView);
 
         Scene scene = new Scene(layout, 300, 200);
 
-        window.setTitle("TreeView");
+        window.setTitle("TableView");
         window.setScene(scene);
         window.show();
     }
