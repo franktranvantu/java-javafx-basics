@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,25 +20,22 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         window = stage;
 
-        ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll("HTML", "CSS", "JAVASCRIPT");
-        choiceBox.setValue("HTML");
-        choiceBox.getSelectionModel().selectedItemProperty().addListener((value, oldValue, newValue) -> {
-            System.out.println(value);
-            System.out.println(oldValue);
-            System.out.println(newValue);
-        });
+        ComboBox<String> comboBox = new ComboBox<>();
+        comboBox.getItems().addAll("HTML", "CSS", "JAVASCRIPT");
+        comboBox.setPromptText("What is your favorite program?");
+        comboBox.setOnAction(actionEvent -> System.out.println(comboBox.getValue()));
+        comboBox.setEditable(true);
 
         Button button = new Button("Click me");
-        button.setOnAction(actionEvent -> System.out.println(choiceBox.getValue()));
+        button.setOnAction(actionEvent -> System.out.println(comboBox.getValue()));
 
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(choiceBox, button);
+        layout.getChildren().addAll(comboBox, button);
 
         Scene scene = new Scene(layout, 300, 200);
 
-        window.setTitle("Listening for selection changes");
+        window.setTitle("ComboBox");
         window.setScene(scene);
         window.show();
     }
