@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -29,6 +30,7 @@ public class Main extends Application {
         Menu fileMenu = new Menu("File");
         Menu editMenu = new Menu("_Edit");
         Menu viewMenu = new Menu("View");
+        Menu helpMenu = new Menu("Help");
 
         MenuItem newItem = new MenuItem("New");
         newItem.setOnAction(actionEvent -> {
@@ -44,14 +46,29 @@ public class Main extends Application {
 
         MenuItem cutItem = new MenuItem("Cut");
         MenuItem copyItem = new MenuItem("Copy");
+
         MenuItem pasteItem = new MenuItem("Paste");
         pasteItem.setDisable(true);
 
-        menuBar.getMenus().addAll(fileMenu, editMenu, viewMenu);
+        CheckMenuItem showLinesItem = new CheckMenuItem("Show Line Numbers");
+        showLinesItem.setOnAction(actionEvent -> {
+            if (showLinesItem.isSelected()) {
+                System.out.println("Program will now display line numbers");
+            } else {
+                System.out.println("Hiding line number");
+            }
+        });
+
+        CheckMenuItem autoSaveItem = new CheckMenuItem("Enable Auto Save");
+        autoSaveItem.setSelected(true);
 
         fileMenu.getItems().addAll(newItem, openItem, openRecentItem, separatorItem1, settingItem, separatorItem2, exitItem);
 
         editMenu.getItems().addAll(cutItem, copyItem, pasteItem);
+
+        helpMenu.getItems().addAll(showLinesItem, autoSaveItem);
+
+        menuBar.getMenus().addAll(fileMenu, editMenu, viewMenu, helpMenu);
 
         BorderPane layout = new BorderPane();
         layout.setTop(menuBar);
@@ -59,7 +76,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(layout, 600, 400);
 
-        window.setTitle("Handling menu clicks");
+        window.setTitle("Check menu items");
         window.setScene(scene);
         window.show();
     }
