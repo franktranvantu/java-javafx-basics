@@ -20,6 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Label nameLabel = new Label("Username:");
+        nameLabel.setStyle("-fx-text-fill: e8e8e8");
         GridPane.setConstraints(nameLabel, 0, 0);
 
         TextField nameInput = new TextField();
