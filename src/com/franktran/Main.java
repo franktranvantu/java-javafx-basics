@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -26,19 +27,31 @@ public class Main extends Application {
         MenuBar menuBar = new MenuBar();
 
         Menu fileMenu = new Menu("File");
-        Menu editMenu = new Menu("Edit");
+        Menu editMenu = new Menu("_Edit");
         Menu viewMenu = new Menu("View");
 
         MenuItem newItem = new MenuItem("New");
+        newItem.setOnAction(actionEvent -> {
+            System.out.println("New");
+        });
+
         MenuItem openItem = new MenuItem("Open...");
         MenuItem openRecentItem = new MenuItem("Open Recent");
-        MenuItem undoItem = new MenuItem("Undo Typing");
+        MenuItem separatorItem1 = new SeparatorMenuItem();
+        MenuItem settingItem = new MenuItem("Setting...");
+        MenuItem separatorItem2 = new SeparatorMenuItem();
+        MenuItem exitItem = new MenuItem("Exit");
+
+        MenuItem cutItem = new MenuItem("Cut");
+        MenuItem copyItem = new MenuItem("Copy");
+        MenuItem pasteItem = new MenuItem("Paste");
+        pasteItem.setDisable(true);
 
         menuBar.getMenus().addAll(fileMenu, editMenu, viewMenu);
 
-        fileMenu.getItems().addAll(newItem, openItem, openRecentItem);
+        fileMenu.getItems().addAll(newItem, openItem, openRecentItem, separatorItem1, settingItem, separatorItem2, exitItem);
 
-        editMenu.getItems().addAll(undoItem);
+        editMenu.getItems().addAll(cutItem, copyItem, pasteItem);
 
         BorderPane layout = new BorderPane();
         layout.setTop(menuBar);
@@ -46,7 +59,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(layout, 600, 400);
 
-        window.setTitle("Making menus");
+        window.setTitle("Handling menu clicks");
         window.setScene(scene);
         window.show();
     }
