@@ -21,6 +21,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Label nameLabel = new Label("Username:");
         nameLabel.setStyle("-fx-text-fill: e8e8e8");
+        nameLabel.setId("bold-label");
         GridPane.setConstraints(nameLabel, 0, 0);
 
         TextField nameInput = new TextField();
@@ -34,8 +35,13 @@ public class Main extends Application {
         passwordInput.setPromptText("Password here...");
         GridPane.setConstraints(passwordInput, 1,1);
 
+        Button signupButton = new Button("Sign Up");
+        signupButton.getStyleClass().add("sign-up");
+        GridPane.setConstraints(signupButton, 1, 2);
+        GridPane.setHalignment(signupButton, HPos.RIGHT);
+
         Button loginButton = new Button("Log In");
-        GridPane.setConstraints(loginButton, 1, 2);
+        GridPane.setConstraints(loginButton, 1, 3);
         GridPane.setHalignment(loginButton, HPos.RIGHT);
 
         GridPane grid = new GridPane();
@@ -43,7 +49,7 @@ public class Main extends Application {
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(8);
         grid.setHgap(8);
-        grid.getChildren().addAll(nameLabel, nameInput, passwordLabel, passwordInput, loginButton);
+        grid.getChildren().addAll(nameLabel, nameInput, passwordLabel, passwordInput, loginButton, signupButton);
 
         Scene scene = new Scene(grid, 300, 200);
         scene.getStylesheets().add("style.css");
