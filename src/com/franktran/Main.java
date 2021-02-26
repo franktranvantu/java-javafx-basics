@@ -23,6 +23,11 @@ public class Main extends Application {
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
         choiceBox.getItems().addAll("HTML", "CSS", "JAVASCRIPT");
         choiceBox.setValue("HTML");
+        choiceBox.getSelectionModel().selectedItemProperty().addListener((value, oldValue, newValue) -> {
+            System.out.println(value);
+            System.out.println(oldValue);
+            System.out.println(newValue);
+        });
 
         Button button = new Button("Click me");
         button.setOnAction(actionEvent -> System.out.println(choiceBox.getValue()));
