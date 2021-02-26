@@ -1,10 +1,13 @@
 package com.franktran;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,22 +23,23 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         window = stage;
 
-        ComboBox<String> comboBox = new ComboBox<>();
-        comboBox.getItems().addAll("HTML", "CSS", "JAVASCRIPT");
-        comboBox.setPromptText("What is your favorite program?");
-        comboBox.setOnAction(actionEvent -> System.out.println(comboBox.getValue()));
-        comboBox.setEditable(true);
+        ListView<String> listView = new ListView<>();
+        listView.getItems().addAll("HTML", "CSS", "JAVASCRIPT", "JAVA", "PYTHON");
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         Button button = new Button("Click me");
-        button.setOnAction(actionEvent -> System.out.println(comboBox.getValue()));
+        button.setOnAction(actionEvent -> {
+            ObservableList<String> programs = listView.getSelectionModel().getSelectedItems();
+            programs.forEach(System.out::println);
+        });
 
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(comboBox, button);
+        layout.getChildren().addAll(listView, button);
 
         Scene scene = new Scene(layout, 300, 200);
 
-        window.setTitle("ComboBox");
+        window.setTitle("ListView");
         window.setScene(scene);
         window.show();
     }
