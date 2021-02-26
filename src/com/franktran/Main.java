@@ -51,6 +51,7 @@ public class Main extends Application {
         tableView.getColumns().addAll(nameColumn, priceColumn, quantityColumn);
 
         TextField nameInput, priceInput, quantityInput;
+
         nameInput = new TextField();
         nameInput.setPromptText("Product name");
 
@@ -61,8 +62,24 @@ public class Main extends Application {
         quantityInput.setPromptText("Product quantity");
 
         Button addButton, deleteButton;
+
         addButton = new Button("Add");
+        addButton.setOnAction(actionEvent -> {
+            String name = nameInput.getText();
+            double price = Double.parseDouble(priceInput.getText());
+            int quantity = Integer.parseInt(quantityInput.getText());
+            products.add(new Product(name, price, quantity));
+
+            nameInput.clear();
+            priceInput.clear();
+            quantityInput.clear();
+        });
+
         deleteButton = new Button("Delete");
+        deleteButton.setOnAction(actionEvent -> {
+            int selectedIndex = tableView.getSelectionModel().getSelectedIndex();
+            products.remove(selectedIndex);
+        });
 
         HBox hBox = new HBox();
         hBox.setSpacing(10);
@@ -75,7 +92,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(layout, 600, 400);
 
-        window.setTitle("Editable tables");
+        window.setTitle("Adding and Deleting table rows");
         window.setScene(scene);
         window.show();
     }
