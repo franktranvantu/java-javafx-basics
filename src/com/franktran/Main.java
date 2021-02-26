@@ -1,8 +1,8 @@
 package com.franktran;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -18,13 +18,17 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("Properties");
 
-        Person person = new Person();
-        person.firstNameProperty().addListener((value, oldValue, newValue) -> {
-            System.out.println(newValue);
-        });
+        IntegerProperty x = new SimpleIntegerProperty(3);
+        IntegerProperty y = new SimpleIntegerProperty();
+
+        y.bind(x.multiply(10));
 
         Button button = new Button("Click me!");
-        button.setOnAction(actionEvent -> person.setFirstName("Frank"));
+        button.setOnAction(actionEvent -> {
+            x.setValue(5);
+            System.out.println(x.getValue());
+            System.out.println(y.getValue());
+        });
 
         StackPane layout = new StackPane(button);
 
