@@ -8,7 +8,9 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,6 +33,7 @@ public class Main extends Application {
         Menu editMenu = new Menu("_Edit");
         Menu viewMenu = new Menu("View");
         Menu helpMenu = new Menu("Help");
+        Menu difficultyMenu = new Menu("Difficulty");
 
         MenuItem newItem = new MenuItem("New");
         newItem.setOnAction(actionEvent -> {
@@ -62,13 +65,24 @@ public class Main extends Application {
         CheckMenuItem autoSaveItem = new CheckMenuItem("Enable Auto Save");
         autoSaveItem.setSelected(true);
 
+        ToggleGroup difficultyToggle = new ToggleGroup();
+        RadioMenuItem easy = new RadioMenuItem("Easy");
+        RadioMenuItem medium = new RadioMenuItem("Medium");
+        RadioMenuItem hard = new RadioMenuItem("Hard");
+
+        easy.setToggleGroup(difficultyToggle);
+        medium.setToggleGroup(difficultyToggle);
+        hard.setToggleGroup(difficultyToggle);
+
         fileMenu.getItems().addAll(newItem, openItem, openRecentItem, separatorItem1, settingItem, separatorItem2, exitItem);
 
         editMenu.getItems().addAll(cutItem, copyItem, pasteItem);
 
         helpMenu.getItems().addAll(showLinesItem, autoSaveItem);
 
-        menuBar.getMenus().addAll(fileMenu, editMenu, viewMenu, helpMenu);
+        difficultyMenu.getItems().addAll(easy, medium, hard);
+
+        menuBar.getMenus().addAll(fileMenu, editMenu, viewMenu, helpMenu, difficultyMenu);
 
         BorderPane layout = new BorderPane();
         layout.setTop(menuBar);
@@ -76,7 +90,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(layout, 600, 400);
 
-        window.setTitle("Check menu items");
+        window.setTitle("Radio menu items");
         window.setScene(scene);
         window.show();
     }
