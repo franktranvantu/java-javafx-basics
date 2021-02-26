@@ -38,7 +38,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(layout, 300, 200);
 
-        window.setTitle("Dropdown menu");
+        window.setTitle("Listening for selection changes");
         window.setScene(scene);
         window.show();
     }
