@@ -45,9 +45,10 @@ public class Main extends Application {
         grid.getChildren().addAll(nameLabel, nameInput, passwordLabel, passwordInput, loginButton);
 
         Scene scene = new Scene(grid, 300, 200);
+        scene.getStylesheets().add("style.css");
 
         stage.setScene(scene);
-        stage.setTitle("Embedding layouts");
+        stage.setTitle("Css themes and styles");
         stage.show();
     }
 }
