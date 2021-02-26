@@ -3,14 +3,17 @@ package com.franktran;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -27,7 +30,7 @@ public class Main extends Application {
         window = stage;
 
         TableColumn<Product, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setMinWidth(100);
+        nameColumn.setMinWidth(400);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         TableColumn<Product, String> priceColumn = new TableColumn<>("Price");
@@ -47,13 +50,32 @@ public class Main extends Application {
         tableView.setItems(products);
         tableView.getColumns().addAll(nameColumn, priceColumn, quantityColumn);
 
+        TextField nameInput, priceInput, quantityInput;
+        nameInput = new TextField();
+        nameInput.setPromptText("Product name");
+
+        priceInput = new TextField();
+        priceInput.setPromptText("Product price");
+
+        quantityInput = new TextField();
+        quantityInput.setPromptText("Product quantity");
+
+        Button addButton, deleteButton;
+        addButton = new Button("Add");
+        deleteButton = new Button("Delete");
+
+        HBox hBox = new HBox();
+        hBox.setSpacing(10);
+        hBox.getChildren().addAll(nameInput, priceInput, quantityInput, addButton, deleteButton);
+
         VBox layout = new VBox(20);
+        layout.setPadding(new Insets(10, 10, 10, 10));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(tableView);
+        layout.getChildren().addAll(tableView, hBox);
 
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(layout, 600, 400);
 
-        window.setTitle("TableView");
+        window.setTitle("Editable tables");
         window.setScene(scene);
         window.show();
     }
